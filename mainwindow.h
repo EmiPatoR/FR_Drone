@@ -26,6 +26,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void setSVMParams(CvSVMParams *val){svm_params = val;}
 
 public slots:
     void on_actionTest4_triggered();
@@ -88,6 +89,42 @@ private:
     //Paint
     QPainterPath path;
     //QPainter painter;
+
+
+    //Classifier
+    CvSVM *svm_classifier;
+    /* ajouter les autres... */
+
+    //Classifier params
+    CvSVMParams *svm_params;
+    /* ajouter les autres... */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 #endif // MAINWINDOW_H

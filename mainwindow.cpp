@@ -22,7 +22,7 @@
 #include "traintestsplit.h"
 #include "frame.h"
 #include "dialogshowdata.h"
-#include <qwt/qwt_plot.h>
+//#include <qwt/qwt_plot.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -293,6 +293,7 @@ void MainWindow::close_tab(int index){
     //ui->tab_algo->removeTab(index);
     delete ui->tab_algo->widget(index);
 }
+
 
 void MainWindow::test(QString fichier){
 

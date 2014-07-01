@@ -21,7 +21,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="5">
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="txt_coef0">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -57,7 +57,7 @@
     </spacer>
    </item>
    <item row="7" column="6">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="btn_use_algo">
      <property name="text">
       <string>Utiliser cet algorithme</string>
      </property>
@@ -71,7 +71,7 @@
     </widget>
    </item>
    <item row="3" column="5">
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="txt_cvalue">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -130,7 +130,7 @@
     </spacer>
    </item>
    <item row="2" column="1">
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="txt_degree">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -154,7 +154,7 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="QLineEdit" name="lineEdit_4">
+    <widget class="QLineEdit" name="txt_gamma">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -177,7 +177,7 @@
     </spacer>
    </item>
    <item row="4" column="1">
-    <widget class="QLineEdit" name="lineEdit_6">
+    <widget class="QLineEdit" name="txt_p">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -207,7 +207,7 @@
     </widget>
    </item>
    <item row="4" column="5">
-    <widget class="QLineEdit" name="lineEdit_5">
+    <widget class="QLineEdit" name="txt_nu">
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -243,7 +243,7 @@
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="QLineEdit" name="lineEdit_7">
+    <widget class="QLineEdit" name="txt_weights">
      <property name="maximumSize">
       <size>
        <width>100</width>
