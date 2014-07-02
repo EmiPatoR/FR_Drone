@@ -2,6 +2,7 @@
 #define FRAME_H
 
 #include <QFrame>
+#include "mainwindow.h"
 
 // remplacer par des enums à terme
 #define CSVC 0
@@ -24,7 +25,8 @@ class Frame : public QFrame
     Q_OBJECT
 
 public:
-    explicit Frame(QWidget *parent = 0);
+    Frame(QWidget *parent = 0);
+    Frame(MainWindow* pere,QString test);
     ~Frame();
 
 public slots:
@@ -32,6 +34,7 @@ public slots:
 
 private:
     Ui::Frame *ui;
+    MainWindow* pere;
 };
 
 #endif // FRAME_H

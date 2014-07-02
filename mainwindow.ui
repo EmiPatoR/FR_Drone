@@ -30,7 +30,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -438,9 +438,6 @@
              </widget>
             </item>
            </layout>
-           <zorder>btn_creer</zorder>
-           <zorder>frame_5</zorder>
-           <zorder>tab_algo</zorder>
           </widget>
           <widget class="QWidget" name="tab_10">
            <attribute name="title">

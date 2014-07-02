@@ -12,8 +12,12 @@
 #include "ardrone/ardrone.h"
 #include "dialog.h"
 #include "mldata.h"
-#include "frame.h"
+//#include "frame.h"
 #include "dialogshowdata.h"
+
+#define ALG_NOTHING -1
+#define ALG_SVM 0
+/* ajouter les autres ici... */
 
 namespace Ui {
 class MainWindow;
@@ -26,7 +30,26 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void setSVMParams(CvSVMParams *val){svm_params = val;}
+    void setSVMParams(double p, double gamma, double degree,double coef0, double C, double nu, int svm_type, int kernel_type ){
+
+
+        std::cerr << "test : " << svm_params <<  std::endl;
+        if(svm_params == NULL){
+            svm_params = new CvSVMParams();
+        }
+
+        svm_params->svm_type = svm_type;
+        svm_params->kernel_type = kernel_type;
+        svm_params->C = C;
+        svm_params->p = p;
+        svm_params->gamma = gamma;
+        svm_params->degree = degree;
+        svm_params->coef0 = coef0;
+        svm_params->nu = nu;
+
+    }
+    void setSVMClassifier(CvSVM *val){svm_classifier = val;}
+    void setAlgoChoisi(int val){algo_choisi = val;}
 
 public slots:
     void on_actionTest4_triggered();
@@ -81,7 +104,7 @@ private:
     DialogShowData* fen_aff;
 
     //Frames
-    Frame *test_frame;
+    //Frame *test_frame;
 
     //Apprentissage
     MLData *data;
@@ -91,6 +114,9 @@ private:
     //QPainter painter;
 
 
+    // Algorithme choisi
+    int algo_choisi;
+
     //Classifier
     CvSVM *svm_classifier;
     /* ajouter les autres... */
@@ -98,32 +124,6 @@ private:
     //Classifier params
     CvSVMParams *svm_params;
     /* ajouter les autres... */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 };
 

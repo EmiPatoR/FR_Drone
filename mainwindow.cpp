@@ -32,7 +32,10 @@ MainWindow::MainWindow(QWidget *parent) :
     fen_ctrl = NULL;
     fen_aff = NULL;
     data = NULL;
-    test_frame = NULL;
+    //test_frame = NULL;
+    svm_params = NULL;
+    svm_classifier = NULL;
+    algo_choisi = ALG_NOTHING;
 
     QIcon icon("./drone.ico");
 
@@ -100,12 +103,14 @@ void MainWindow::dessiner_sinus(){
 }
 
 void MainWindow::on_btn_creer_clicked(){
+    Frame *test_frame;
     const QString titre_algo = ui->list_algo->currentText();
-    test_frame = new Frame(this);
+    test_frame = new Frame(this,"test");
     if(ui->txt_algo_name->text().isEmpty())
         ui->tab_algo->addTab(test_frame,titre_algo);
     else
         ui->tab_algo->addTab(test_frame,ui->txt_algo_name->text());
+    //connect(test_frame, SIGNAL(initSVM(double,double,double,double,double,double,int,int)), this, SLOT(setSVMParams(double,double,double,double,double,double,int,int)));
     ui->txt_algo_name->clear();
 }
 
@@ -353,21 +358,35 @@ void MainWindow::test(QString fichier){
     const cv::Mat* vars = data->get_var_idx();
 
     //Classifier params
-    CvSVMParams params;
+    /* CvSVMParams params;
     params.svm_type    = CvSVM::C_SVC;
     params.kernel_type = CvSVM::LINEAR;
     params.term_crit   = cvTermCriteria(CV_TERMCRIT_ITER, 100, 1e-6);
+    */
 
     //Classifier
-    CvSVM svm;
+    /* CvSVM svm; */
+
+
+    std::cerr << "[DEBUG] Avant term_crit" << std::endl;
 
     //Training
-    svm.train(*samples,*responses,*vars,*train_sample,params);
+    if (svm_params == NULL) {
+        std::cerr << "[DEBUG] svm_params == NULL" << std::endl;
+    }
+
+    svm_params->term_crit = cvTermCriteria(CV_TERMCRIT_ITER, 100, 1e-6);
+
+    std::cerr << "[DEBUG] Après term_crit" << std::endl;
+
+    svm_classifier->train(*samples,*responses,*vars,*train_sample,*svm_params);
+
+    std::cerr << "[DEBUG] Après Train" << std::endl;
 
     cv::Mat predicted(test_sample->rows,1,CV_32FC1);
     for(int i=0;i<predicted.rows;i++){
         cv::Mat sample = samples->row(test_sample->at<int>(i,0));
-        predicted.at<float>(i,0) = svm.predict(sample);
+        predicted.at<float>(i,0) = svm_classifier->predict(sample);
     }
 
     std::cout << "Predictions : " << predicted << std::endl;
@@ -379,6 +398,8 @@ MainWindow::~MainWindow()
     delete ui;
     if(fen_ctrl != NULL) delete fen_ctrl;
     if(fen_aff != NULL) delete fen_aff;
-    if(test_frame != NULL) delete test_frame;
+    //if(test_frame != NULL) delete test_frame;
     if(data != NULL) delete data;
+    if(svm_params != NULL) delete svm_params;
+    if(svm_classifier != NULL) delete svm_classifier;
 }
